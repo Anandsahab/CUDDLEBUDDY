@@ -1,0 +1,84 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Shopping Cart</h1>
+    {% if cart_items %}
+        <div class="table-responsive">
+            <table class="table cart-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in cart_items %}
+                    <tr>
+                        <td>
+                            {% if item.product.image %}
+                                <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-thumbnail" style="max-width: 100px;">
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ item.product.get_absolute_url }}" class="text-decoration-none">{{ item.product.name }}</a>
+                        </td>
+                        <td>
+                            <form action="{% url 'cart:cart_add' item.product.id %}" method="post" >
+                                {% csrf_token %}
+                                <div class="input-group input-group-sm" style="width: 8rem;">
+                                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="20" class="form-control">
+                                    <input type="hidden" name="override" value="1">
+                                    <button type="submit" class="btn btn-outline-secondary">
+                                        <i class="fas fa-sync-alt"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                        <td>₹{{ item.price }}</td>
+                        <td>₹{{ item.total_price }}</td>
+                        <td>
+                            <form action="{% url 'cart:cart_remove' item.product.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr class="table-primary">
+                    <td colspan="4"><strong>Total</strong></td>
+                    <td colspan="2"><strong>₹{{ cart.get_total_price }}</strong></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'products:product_list' %}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left me-2"></i>Continue Shopping
+            </a>
+            <a href="{% url 'orders:order_create' %}" class="btn btn-success">
+                <i class="fas fa-shopping-cart me-2"></i>Proceed to Checkout
+            </a>
+        </div>
+    {% else %}
+        <div class="text-center">
+            <p>Your cart is empty.</p>
+            <a href="{% url 'products:product_list' %}" class="btn btn-primary">
+                <i class="fas fa-shopping-bag me-2"></i>Continue Shopping
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Add Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+{% endblock %} 

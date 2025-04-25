@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5" style="padding-top: 90px;">
+  <h2 class="mb-4">📑 My Receipts</h2>
+
+  <!-- Appointments -->
+  <h4>🗓 Appointments</h4>
+  {% if appointments %}
+    <ul class="list-group mb-4">
+      {% for appt in appointments %}
+        <li class="list-group-item">
+          <strong>{{ appt.date }} {{ appt.time }}</strong><br>
+          Name: {{ appt.name }}<br>
+          Phone: {{ appt.phone }}<br>
+          Persons: {{ appt.persons }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No appointments found.</p>
+  {% endif %}
+
+  <!-- Pet Bookings -->
+  <h4>🐾 Pet Bookings</h4>
+  {% if pet_bookings %}
+    <ul class="list-group mb-4">
+      {% for pet in pet_bookings %}
+        <li class="list-group-item">
+          Pet: {{ pet.pet_name }} ({{ pet.pet_type }})<br>
+          Breed: {{ pet.breed }}<br>
+          Email: {{ pet.email }}<br>
+          Address: {{ pet.address }}<br>
+          Payment: {{ pet.payment_method }}<br>
+          Expected Delivery: {{ pet.expected_delivery }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No pet bookings found.</p>
+  {% endif %}
+
+{% endblock %}

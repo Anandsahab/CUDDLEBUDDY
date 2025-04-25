@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% load static %}
+    <meta charset="utf-8" />
+    <title>KRLE KAAM</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="fonts/material-design-iconic-font/css/material-design-iconic-font.min.css"
+    />
+
+    <!-- <link rel="stylesheet" href="/static/css/sign.css"> -->
+    <link rel="stylesheet" href="{% static 'css/sgn.css' %}" />
+  </head>
+
+  <body>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="bg-{{ message.tags }}-1000 border border-{{ message.tags }}-700 text-{{ message.tags }}-900 px-4 py-3 rounded relative shadow mb-4" role="alert">
+                <strong class="capitalize">{{ message.tags }}:</strong>
+                <span class="block sm:inline">{{ message }}</span>
+                <button type="button" class="absolute top-2 right-2 text-{{ message.tags }}-700" onclick="this.parentElement.style.display='none';">
+                    &times;
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-full max-w-xl z-50 ">
+      <!-- <div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-full max-w-xl z-50 bg-yellow-900 bg-opacity-90 rounded-xl p-4"> -->
+
+  </div>
+    <div class="signup-container">
+      <div class="signup-header">
+        <h2>Create Account</h2>
+        <p>Join our pet adoption community</p>
+      </div>
+
+      <form action="{% url 'signup' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-box">
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              name="confirm_password"
+              placeholder="Confirm Password"
+              required
+            />
+          </div>
+          <!-- <div class="input-group select-group">
+            <i class="fas fa-user-tag"></i>
+            <select name="role" required>
+              <option value="">Select Role</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+          </div> -->
+					
+					<div class="input-group ">
+						<i class="fas fa-user-tag"></i>
+						<select name="Answer " required>
+							<option value="">Have you ever had a pet before?</option>
+							<option value="user">Yes</option>
+							<option value="admin">No</option>
+					</div>
+					</select>
+				</div>
+			</div>
+      <button type="submit" class="btn">Create Account</button>
+      <div class="login-link">
+          Already have an account? <a href="{% url 'login'%}">Login</a>
+      </div>
+      </form>
+    </div>
+  </body>
+</html>

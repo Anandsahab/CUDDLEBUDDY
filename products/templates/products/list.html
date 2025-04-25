@@ -1,0 +1,74 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- Category Sidebar -->
+        <div class="col-lg-3">
+            <div class="category-sidebar mb-4">
+                <h3>Categories</h3>
+                <ul>
+                    <li><a href="{% url 'products:product_list' %}" {% if not category %}class="active"{% endif %}>All Categories</a></li>
+                    {% for c in categories %}
+                    <li>
+                        <a href="{{ c.get_absolute_url }}" {% if category.slug == c.slug %}class="active"{% endif %}>
+                            {{ c.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="col-lg-9">
+            <div class="row">
+                {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="product-card">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+                        {% else %}
+                        <img src="{% static 'images/no-image.png' %}" alt="No image available" class="card-img-top">
+                        {% endif %}
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <div class="price">₹{{ product.price }}</div>
+                            {% if product.stock > 0 %}
+                            <span class="stock-badge in-stock">In Stock</span>
+                            {% else %}
+                            <span class="stock-badge out-of-stock">Out of Stock</span>
+                            {% endif %}
+                            
+                            <div class="product-actions">
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary details-btn">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </a>
+                                <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    {{ product.cart_form.quantity }}
+                                    {{ product.cart_form.override }}
+                                    <button type="submit" class="btn btn-primary add-cart-btn" {% if product.stock <= 0 %}disabled{% endif %}>
+                                        <i class="fas fa-shopping-cart"></i> Add
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No products found.
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

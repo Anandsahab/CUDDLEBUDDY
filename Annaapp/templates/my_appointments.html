@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5" style="padding-top: 90px;">
+  <h4>Check Your Appointments</h4>
+  <form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+      <input type="email" name="email" class="form-control" placeholder="Enter your email" required>
+    </div>
+    <button type="submit" class="btn btn-primary">View My Appointments</button>
+  </form>
+
+  {% if appointments %}
+    <h3 class="mt-4">Appointments for {{ email }}</h3>
+    <ul class="list-group mt-3">
+      {% for appointment in appointments %}
+        <li class="list-group-item">
+          <strong>{{ appointment.date }} {{ appointment.time }}</strong><br>
+          Name: {{ appointment.name }}<br>
+          Phone: {{ appointment.phone }}<br>
+          Persons: {{ appointment.persons }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% elif email %}
+    <p class="mt-3 text-danger">No appointments found for {{ email }}.</p>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,147 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Products{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Category Sidebar -->
+        <div class="col-lg-3">
+            <div class="category-sidebar mb-4">
+                <h3>Categories</h3>
+                <ul class="list-unstyled">
+                    <li {% if not category %}class="active"{% endif %}>
+                        <a href="{% url 'products:product_list' %}" class="text-decoration-none">
+                            All Products
+                        </a>
+                    </li>
+                    {% for c in categories %}
+                    <li {% if category.slug == c.slug %}class="active"{% endif %}>
+                        <a href="{{ c.get_absolute_url }}" class="text-decoration-none">
+                            {{ c.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Enhanced Pet Care Tips Carousel -->
+            <div class="pet-tips-carousel mb-4">
+                <h3>Pet Care Tips</h3>
+                <div id="petTipsCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#petTipsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#petTipsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#petTipsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#petTipsCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{% static 'images/categories/pet-food.jpg' %}" class="d-block w-100" alt="Pet Grooming">
+                            <div class="carousel-caption">
+                                <h5>Grooming Tips</h5>
+                                <p class="small">Regular brushing keeps your pet's coat healthy and reduces shedding</p>
+                                <a href="#" class="btn btn-sm btn-light mt-1">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/categories/pet-grocery.jpg' %}" class="d-block w-100" alt="Aquarium Care">
+                            <div class="carousel-caption">
+                                <h5>Aquarium Care</h5>
+                                <p class="small">Change 25% of water every two weeks for a healthy environment</p>
+                                <a href="#" class="btn btn-sm btn-light mt-1">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/puppies-basket.jpg' %}" class="d-block w-100" alt="Bird Nutrition">
+                            <div class="carousel-caption">
+                                <h5>Bird Nutrition</h5>
+                                <p class="small">Provide fresh fruits and vegetables for optimal bird health</p>
+                                <a href="#" class="btn btn-sm btn-light mt-1">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'images/hero-pets.jpg' %}" class="d-block w-100" alt="Dog Exercise">
+                            <div class="carousel-caption">
+                                <h5>Daily Exercise</h5>
+                                <p class="small">Dogs need regular exercise for physical and mental wellbeing</p>
+                                <a href="#" class="btn btn-sm btn-light mt-1">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#petTipsCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#petTipsCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="col-lg-9">
+            <h2 class="mb-4">{% if category %}{{ category.name }}{% else %}All Products{% endif %}</h2>
+            <div class="row">
+                {% for product in products %}
+                <div class="col-md-4 mb-4">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+                            {% else %}
+                            <img src="{% static 'images/no-image.png' %}" alt="No image available" class="card-img-top">
+                            {% endif %}
+                            {% if product.stock > 0 %}
+                            <span class="stock-badge in-stock">In Stock</span>
+                            {% else %}
+                            <span class="stock-badge out-of-stock">Out of Stock</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description|truncatewords:20 }}</p>
+                            <div class="price">₹{{ product.price }}</div>
+                            
+                            <div class="product-actions">
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary details-btn">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </a>
+                                {% if product.stock > 0 %}
+                                    {% if user.is_authenticated %}
+                                    <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input type="hidden" name="override" value="0">
+                                        <button type="submit" class="btn btn-primary add-cart-btn">
+                                            <i class="fas fa-shopping-cart"></i> Add
+                                        </button>
+                                    </form>
+                                    {% else %}
+                                    <a href="{% url 'login' %}" class="btn btn-primary add-cart-btn">
+                                        <i class="fas fa-sign-in-alt"></i> Login to Buy
+                                    </a>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        No products found in this category.
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

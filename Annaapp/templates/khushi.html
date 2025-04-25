@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Booking Summary & Payment</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("CqsaRquBMIMJ3ktTA");
+      })();
+    </script>
+
+    {% comment %}
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+    <script type="text/javascript">
+      emailjs.init("CqsaRquBMIMJ3ktTA"); // Initialize EmailJS by public key
+    </script>
+    {% endcomment %}
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f8fb;
+        margin: 0;
+        padding: 20px;
+      }
+      .hidden {
+        display: none;
+      }
+
+      .container {
+        max-width: 700px;
+        margin: auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 20px;
+      }
+
+      .summary,
+      .payment {
+        margin-bottom: 25px;
+      }
+
+      .summary div,
+      .payment div {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+
+      .label {
+        font-weight: bold;
+        color: #333;
+      }
+
+      select,
+      button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+      }
+
+      button {
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Booking Summary</h2>
+
+      <div class="summary">
+        <div>
+          <span class="label">Name:</span>
+          <span id="name" class="name">{{ receipt.name }}</span>
+        </div>
+
+        <div>
+          <span class="label">Email:</span>
+          <span id="email" class="email">{{ receipt.email }}</span>
+        </div>
+        <div>
+          <span class="label">DateIn:</span>
+          <span id="datein" class="datein">{{ receipt.datein }}</span>
+        </div>
+        <div>
+          <span class="label">Dateout:</span>
+          <span id="dateout" class="dateout">{{ receipt.dateout }}</span>
+        </div>
+        <div>
+          <span class="label">Member:</span>
+          <span id="member" class="members">{{ receipt.members }}</span>
+        </div>
+        <div>
+          <span class="label">Room:</span>
+          <span id="room" class="Room">{{ receipt.Room }}</span>
+        </div>
+        <div>
+          <span class="label">Special request:</span>
+          <span id="special" class="special">{{ receipt.special }}</span>
+        </div>
+        <div>
+          <span class="price">Total Price per Person per Night: ₹</span>
+          <span id="price" class="price">{{ price}}</span>
+        </div>
+
+        <button type="button" id="sendOtpBtn">Send OTP</button>
+        <input
+          type="number"
+          id="otp"
+          name="otp"
+          placeholder="Enter OTP"
+          class="hidden"
+        />
+        <button type="button" id="verifyOtpBtn" class="hidden">
+          Verify OTP
+        </button>
+
+        <div id="statusMessage"></div>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById("sendOtpBtn")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+
+          const otp = Math.floor(100000 + Math.random() * 900000); // Generate 6-digit OTP
+          localStorage.setItem("generatedOtp", otp); // Store OTP temporarily
+
+          const name = document.getElementById("name").textContent.trim();
+          const email = document.getElementById("email").textContent.trim();
+          const datein = document.getElementById("datein").textContent.trim();
+          const dateout = document.getElementById("dateout").textContent.trim();
+          const member = document.getElementById("member").textContent.trim();
+          const room = document.getElementById("room").textContent.trim();
+          const special = document.getElementById("special").textContent.trim();
+          const price = document.getElementById("price").textContent.trim();
+
+          const params = {
+            to_email: email,
+            name: name,
+            datein: datein,
+            dateout: dateout,
+            member: member,
+            room: room,
+            special: special,
+            passcode: otp,
+            price: price,
+          };
+
+          emailjs
+            .send("service_id7zmis", "template_ou6832e", params)
+            .then(function (response) {
+              console.log("EmailJS success:", response);
+              document.getElementById("statusMessage").innerText =
+                "OTP sent to " + email;
+              document.getElementById("otp").classList.remove("hidden");
+              document
+                .getElementById("verifyOtpBtn")
+                .classList.remove("hidden");
+              document.getElementById("sendOtpBtn").disabled = true;
+              document.getElementById("sendOtpBtn").innerText = "OTP Sent ✅";
+            })
+            .catch(function (error) {
+              console.error("EmailJS error:", error);
+              alert("Error: " + JSON.stringify(error));
+              document.getElementById("statusMessage").innerText =
+                "Error sending OTP.";
+            });
+        });
+
+      document
+        .getElementById("verifyOtpBtn")
+        .addEventListener("click", function (event) {
+          event.preventDefault();
+
+          const enteredOtp = document.getElementById("otp").value;
+          const storedOtp = localStorage.getItem("generatedOtp");
+
+          if (!enteredOtp || enteredOtp.length !== 6) {
+            document.getElementById("statusMessage").innerText =
+              "Please enter a valid 6-digit OTP.";
+            return;
+          }
+
+          if (enteredOtp === storedOtp) {
+            document.getElementById("statusMessage").innerText =
+              "OTP Verified! ✅";
+            localStorage.removeItem("generatedOtp");
+
+            setTimeout(function () {
+              alert("Your booking is confirmed! Redirecting to homepage...");
+              window.location.href = "{% url 'home' %}";
+            }, 1500);
+          } else {
+            document.getElementById("statusMessage").innerText =
+              "Invalid OTP. ❌ Try again.";
+          }
+        });
+    </script>
+  </body>
+</html>

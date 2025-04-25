@@ -1,0 +1,221 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block title %}Pet Care Guides{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="container mt-5">
+    <div class="row mb-5">
+        <div class="col-12 text-center">
+            <h1 class="display-4 fw-bold">Pet Care <span class="text-primary">Guides</span></h1>
+            <p class="lead text-muted">Expert advice for every stage of your pet's life</p>
+        </div>
+    </div>
+
+    <!-- Category Navigation -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="guides-nav">
+                <ul class="nav nav-pills justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#all-guides">All Guides</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#puppies-kittens">Puppies & Kittens</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#adult-pets">Adult Pets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#senior-pets">Senior Pets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pet-nutrition">Nutrition</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#health-wellness">Health & Wellness</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Guides -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="section-title">Featured Guides</h2>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="featured-guide-card">
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        <img src="{% static 'images/puppies-basket.jpg' %}" alt="Puppy Care" class="img-fluid rounded-start h-100 object-fit-cover">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <div class="guide-badge">Featured</div>
+                            <h3 class="card-title">Complete Puppy Care Guide</h3>
+                            <p class="card-text">Everything you need to know about caring for your new puppy, from vaccinations to training.</p>
+                            <div class="guide-meta">
+                                <span><i class="fas fa-clock me-1"></i> 10 min read</span>
+                                <span><i class="fas fa-paw me-1"></i> Dogs</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-3">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="featured-guide-card">
+                <div class="row g-0">
+                    <div class="col-md-5">
+                        <img src="{% static 'images/hero-pets.jpg' %}" alt="Senior Pet Care" class="img-fluid rounded-start h-100 object-fit-cover">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <div class="guide-badge">Featured</div>
+                            <h3 class="card-title">Senior Pet Wellness</h3>
+                            <p class="card-text">Learn how to keep your senior pet healthy, comfortable and happy during their golden years.</p>
+                            <div class="guide-meta">
+                                <span><i class="fas fa-clock me-1"></i> 8 min read</span>
+                                <span><i class="fas fa-paw me-1"></i> All Pets</span>
+                            </div>
+                            <a href="#" class="btn btn-primary mt-3">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- All Guides Section -->
+    <div id="all-guides" class="row mb-5">
+        <div class="col-12">
+            <h2 class="section-title">All Pet Care Guides</h2>
+        </div>
+        
+        <!-- Guide Cards -->
+        <div class="col-md-4 mb-4">
+            <div class="guide-card">
+                <div class="guide-card-img">
+                    <img src="{% static 'images/categories/pet-food.jpg' %}" alt="Nutrition Guide" class="img-fluid">
+                    <div class="guide-category">Nutrition</div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>Balanced Nutrition for Dogs</h4>
+                    <p>Understanding your dog's nutritional needs for optimal health and vitality.</p>
+                    <div class="guide-meta">
+                        <span><i class="fas fa-clock me-1"></i> 7 min read</span>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary mt-2">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="guide-card">
+                <div class="guide-card-img">
+                    <img src="{% static 'images/categories/pet-grocery.jpg' %}" alt="Kitten Care" class="img-fluid">
+                    <div class="guide-category">Kittens</div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>First 30 Days With Your Kitten</h4>
+                    <p>Essential tips for helping your kitten adjust to their new home safely.</p>
+                    <div class="guide-meta">
+                        <span><i class="fas fa-clock me-1"></i> 6 min read</span>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary mt-2">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="guide-card">
+                <div class="guide-card-img">
+                    <img src="{% static 'images/puppies-basket.jpg' %}" alt="Training Guide" class="img-fluid">
+                    <div class="guide-category">Training</div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>Basic Puppy Training Guide</h4>
+                    <p>Start your puppy's training journey with these fundamental commands.</p>
+                    <div class="guide-meta">
+                        <span><i class="fas fa-clock me-1"></i> 9 min read</span>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary mt-2">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="guide-card">
+                <div class="guide-card-img">
+                    <img src="{% static 'images/hero-pets.jpg' %}" alt="Health Guide" class="img-fluid">
+                    <div class="guide-category">Health</div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>Pet Vaccination Schedule</h4>
+                    <p>Keep track of essential vaccinations for your pets at every life stage.</p>
+                    <div class="guide-meta">
+                        <span><i class="fas fa-clock me-1"></i> 5 min read</span>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary mt-2">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="guide-card">
+                <div class="guide-card-img">
+                    <img src="{% static 'images/categories/pet-food.jpg' %}" alt="Grooming Guide" class="img-fluid">
+                    <div class="guide-category">Grooming</div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>At-Home Pet Grooming Tips</h4>
+                    <p>Professional grooming techniques you can easily do at home.</p>
+                    <div class="guide-meta">
+                        <span><i class="fas fa-clock me-1"></i> 8 min read</span>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary mt-2">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="guide-card">
+                <div class="guide-card-img">
+                    <img src="{% static 'images/categories/pet-grocery.jpg' %}" alt="Senior Care" class="img-fluid">
+                    <div class="guide-category">Senior</div>
+                </div>
+                <div class="guide-card-body">
+                    <h4>Caring for Aging Pets</h4>
+                    <p>Recognize and address the changing needs of your senior pet.</p>
+                    <div class="guide-meta">
+                        <span><i class="fas fa-clock me-1"></i> 7 min read</span>
+                    </div>
+                    <a href="#" class="btn btn-outline-primary mt-2">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Newsletter Sign-up -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="guides-newsletter p-4 rounded text-center">
+                <h3>Get Pet Care Tips Delivered to Your Inbox</h3>
+                <p class="text-muted">Subscribe to our newsletter for weekly pet care advice</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <form class="d-flex">
+                            <input type="email" class="form-control me-2" placeholder="Your email address">
+                            <button type="submit" class="btn btn-primary">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

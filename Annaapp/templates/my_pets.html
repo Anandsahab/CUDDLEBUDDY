@@ -1,0 +1,77 @@
+<style>
+.pet-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .pet-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  .pet-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .pet-info h3 {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .pet-info p {
+    margin: 4px 0;
+    color: #555;
+  }
+  
+</style>
+
+
+<h2>🐾 My Uploaded Pets</h2>
+
+{% if pets %}
+<div class="pet-list">
+  {% for pet in pets %}
+    <div class="pet-card">
+      <img src="{{ pet.image.url }}" alt="{{ pet.name }}" class="pet-image">
+
+      <div class="pet-info">
+        <h3>{{ pet.name }}</h3>
+        <p><strong>Breed:</strong> {{ pet.breed }}</p>
+        <p><strong>Age:</strong> {{ pet.age }}</p>
+        <p><strong>Status:</strong> {{ pet.get_status_display }}</p>
+      </div>
+
+      {% if user.is_superuser %}
+        <form action="{% url 'delete_pet' pet.id %}" method="POST" style="margin-left: auto;">
+          {% csrf_token %}
+          <button type="submit" style="
+              background-color: #e74c3c;
+              color: white;
+              border: none;
+              padding: 6px 12px;
+              border-radius: 6px;
+              cursor: pointer;
+              font-size: 14px;
+          ">
+            Delete
+          </button>
+        </form>
+      {% endif %}
+
+    </div>
+  {% endfor %}
+</div>
+
+{% else %}
+  <p>You haven't uploaded any pets yet.</p>
+{% endif %}

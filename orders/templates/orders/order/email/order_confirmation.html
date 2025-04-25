@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #FF8C00;
+        }
+        .order-details {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        .product-list {
+            margin: 20px 0;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Order Confirmation</h1>
+            <h2>Buddy Store</h2>
+        </div>
+        
+        <p>Dear {{ order.first_name }},</p>
+        
+        <p>Thank you for your order! We're excited to confirm that your order has been received and is being processed.</p>
+        
+        <div class="order-details">
+            <h3>Order Details:</h3>
+            <p><strong>Order Number:</strong> {{ order.id }}</p>
+            <p><strong>Order Date:</strong> {{ order.created|date:"F j, Y" }}</p>
+            <p><strong>Shipping Address:</strong><br>
+                {{ order.first_name }} {{ order.last_name }}<br>
+                {{ order.address }}<br>
+                {{ order.postal_code }} {{ order.city }}
+            </p>
+        </div>
+
+        <div class="product-list">
+            <h3>Ordered Items:</h3>
+            {% for item in order.items.all %}
+            <div class="product-item">
+                <p>{{ item.product.name }} - Quantity: {{ item.quantity }} - ₹{{ item.price }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="total">
+            <p>Total Amount: ₹{{ order.total_price }}</p>
+        </div>
+
+        <div class="footer">
+            <p>Thank you for shopping with Buddy Store!</p>
+            <p>If you have any questions about your order, please contact our customer service.</p>
+            <p>&copy; {% now "Y" %} Buddy Store. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html> 

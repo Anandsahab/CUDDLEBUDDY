@@ -1,0 +1,32 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="category-sidebar">
+                <h3>Categories</h3>
+                <ul class="list-unstyled">
+                    <li {% if not category %}class="fw-bold"{% endif %}>
+                        <a href="{% url 'products:product_list' %}" class="text-decoration-none">
+                            All Products
+                        </a>
+                    </li>
+                    {% for c in categories %}
+                    <li {% if category.slug == c.slug %}class="fw-bold"{% endif %}>
+                        <a href="{{ c.get_absolute_url }}" class="text-decoration-none">
+                            {{ c.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            {% block product_content %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %} 

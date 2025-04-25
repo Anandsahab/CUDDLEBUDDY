@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Login Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Font Awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglYxQaD41Z1qzFg1TZ+yxUgFhzzgK+q5kWzQDXcYVOZwJCR9+pFqf1xIoD3Dk9eA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/sign.css' %}" />
+  </head>
+
+  <body>
+    <!-- Message Box -->
+    <div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-full max-w-xl z-50">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="bg-yellow-100 border border-yellow-700 text-yellow-900 px-4 py-3 rounded relative shadow mb-4" role="alert">
+            <strong class="capitalize">{{ message.tags }}:</strong>
+            <span class="block sm:inline">{{ message }}</span>
+            <button type="button" class="absolute top-2 right-2 text-yellow-700" onclick="this.parentElement.style.display='none';">
+              &times;
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <!-- Login Form Container -->
+    <div class="login-container">
+      <div class="login-header">
+        <h2>Welcome Back</h2>
+        <p>Login to find your perfect pet companion</p>
+      </div>
+
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+
+        <div class="input-group">
+          <i class="fas fa-user"></i>
+          <input type="text" name="username" placeholder="Username" required />
+        </div>
+
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="password" placeholder="Password" required />
+        </div>
+
+        <div class="remember-forgot">
+          <label class="remember-me">
+            <input type="checkbox" name="remember" />
+            <span>Remember me</span>
+          </label>
+          <a href="#" class="forgot-password">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn">Login</button>
+
+        <div class="social-login">
+          <p>Or continue with</p>
+          <div class="social-icons">
+            <a href="{% url 'google_login' %}" class="social-icon">
+              <i class="fab fa-google"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="signup-link">
+          Don't have an account? <a href="{% url 'signup' %}">Sign up</a>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

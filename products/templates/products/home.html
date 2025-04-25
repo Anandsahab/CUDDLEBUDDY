@@ -1,0 +1,339 @@
+{% extends "products/base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section mb-5">
+    <div class="hero-image-container">
+        <img src="{% static 'images/puppies-basket.jpg' %}" alt="Cute puppies" class="hero-background-image">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Welcome to <span class="text-primary">Buddy Store</span></h1>
+                <p class="lead mb-4">Your one-stop shop for all pet needs. Find the best products for your furry friends!</p>
+                <a href="{% url 'products:product_list' %}" class="btn btn-primary btn-lg">
+                    Shop Now <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Categories -->
+<section class="featured-categories mb-5">
+    <div class="container">
+        <h2 class="section-title">Shop by Category</h2>
+        <div class="row">
+            <!-- Bird Supplies Category -->
+            <div class="col-md-6 mb-4">
+                <div class="category-card animate-on-scroll">
+                    <a href="{% url 'products:product_list' %}">
+                        <img src="https://images.pexels.com/photos/4039154/pexels-photo-4039154.jpeg" alt="Bird Supplies" class="category-img">
+                        <div class="category-overlay">
+                            <h3>Bird Supplies</h3>
+                            <p>Food, cages, and accessories for parrots, finches, and more.</p>
+                            <span class="btn btn-light">Shop Now</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Cat Food Category -->
+            <div class="col-md-6 mb-4">
+                <div class="category-card pet-food-category animate-on-scroll" data-delay="200">
+                    <a href="{% url 'products:product_list' %}">
+                        <img src="https://media.gettyimages.com/id/2080151176/photo/cat-eating-out-of-bowl.jpg?s=2048x2048&w=gi&k=20&c=6h8ml2F8ZOqUZkRp8Kk5zIk-ZzMabYuejULJgPJ8Yzw=" alt="Cat Food" class="category-img">
+                        <div class="category-overlay">
+                            <h3>Cat Food</h3>
+                            <p>High-quality food tailored to cats' unique dietary needs.</p>
+                            <span class="btn btn-light">Shop Now</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Dog Food Category -->
+            <div class="col-md-6 mb-4">
+                <div class="category-card pet-food-category animate-on-scroll" data-delay="300">
+                    <a href="{% url 'products:product_list' %}">
+                        <img src="https://images.pexels.com/photos/6568950/pexels-photo-6568950.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Dog Food" class="category-img">
+                        <div class="category-overlay">
+                            <h3>Dog Food</h3>
+                            <p>Nutritious meals and snacks for dogs of all breeds and sizes.</p>
+                            <span class="btn btn-light">Shop Now</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Fish & Aquatics Category -->
+            <div class="col-md-6 mb-4">
+                <div class="category-card animate-on-scroll" data-delay="400">
+                    <a href="{% url 'products:product_list' %}">
+                        <img src="https://images.pexels.com/photos/5692135/pexels-photo-5692135.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Fish & Aquatics" class="category-img">
+                        <div class="category-overlay">
+                            <h3>Fish & Aquatics</h3>
+                            <p>Aquariums, filters, and fish food for all aquatic pets.</p>
+                            <span class="btn btn-light">Shop Now</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pet Carousel Section -->
+<section class="pet-carousel mb-5">
+    <div class="container">
+        <h2 class="section-title">Pet Companions</h2>
+        <div class="row">
+            <div class="col-12">
+                <div id="petCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        <button type="button" data-bs-target="#petCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+                    <div class="carousel-inner rounded shadow">
+                        <div class="carousel-item active">
+                            <img src="https://images.pexels.com/photos/58997/pexels-photo-58997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Dog">
+                            <div class="carousel-caption">
+                                <h3>Loyal Companions</h3>
+                                <p>Find the best products for your furry friends.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.pexels.com/photos/208984/pexels-photo-208984.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Cat">
+                            <div class="carousel-caption">
+                                <h3>Feline Friends</h3>
+                                <p>Keep your cats happy and healthy.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.pexels.com/photos/128756/pexels-photo-128756.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Fish">
+                            <div class="carousel-caption">
+                                <h3>Aquatic Wonders</h3>
+                                <p>Everything for your aquatic pets.</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="https://images.pexels.com/photos/792416/pexels-photo-792416.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="d-block w-100" alt="Bird">
+                            <div class="carousel-caption">
+                                <h3>Feathered Friends</h3>
+                                <p>Quality products for your birds.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#petCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#petCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="featured-products mb-5">
+    <div class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="row">
+            {% for product in featured_products %}
+            <div class="col-md-3 mb-4">
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        {% if product.image %}
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img-top">
+                        {% else %}
+                        <img src="{% static 'images/no-image.png' %}" alt="No image available" class="card-img-top">
+                        {% endif %}
+                        {% if product.stock > 0 %}
+                        <span class="stock-badge in-stock">In Stock</span>
+                        {% else %}
+                        <span class="stock-badge out-of-stock">Out of Stock</span>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <div class="price">₹{{ product.price }}</div>
+                        
+                        <div class="product-actions">
+                            <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary details-btn">
+                                <i class="fas fa-info-circle"></i> Details
+                            </a>
+                            <form action="{% url 'cart:cart_add' product.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <input type="hidden" name="quantity" value="1">
+                                <button type="submit" class="btn btn-primary add-cart-btn" {% if product.stock <= 0 %}disabled{% endif %}>
+                                    <i class="fas fa-shopping-cart"></i> Add
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Quick Order Lookup -->
+<section class="pet-care-timeline mb-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-paw me-2"></i>The Pet Care Journey</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="timeline-wrapper">
+                            <div class="timeline-header text-center mb-4">
+                                <h5 class="text-primary">Essential Care Through Every Life Stage</h5>
+                                <p class="text-muted">Providing the best for your furry friend at each stage of their life</p>
+                            </div>
+                            
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-item-content">
+                                        <div class="timeline-icon">
+                                            <i class="fas fa-baby"></i>
+                                        </div>
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content shadow-sm">
+                                            <h5 class="mb-2">Puppy/Kitten (0-1 year)</h5>
+                                            <ul class="small mb-0 ps-3">
+                                                <li>High-quality puppy/kitten food</li>
+                                                <li>Vaccination schedule</li>
+                                                <li>Training essentials</li>
+                                                <li>Comfortable bedding</li>
+                                            </ul>
+                                            <a href="#" class="btn btn-sm btn-outline-primary mt-2">Shop Puppy/Kitten</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-item-content">
+                                        <div class="timeline-icon">
+                                            <i class="fas fa-dog"></i>
+                                        </div>
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content shadow-sm">
+                                            <h5 class="mb-2">Adult (1-7 years)</h5>
+                                            <ul class="small mb-0 ps-3">
+                                                <li>Balanced nutrition</li>
+                                                <li>Regular exercise toys</li>
+                                                <li>Dental care products</li>
+                                                <li>Grooming supplies</li>
+                                            </ul>
+                                            <a href="#" class="btn btn-sm btn-outline-primary mt-2">Shop Adult</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="timeline-item">
+                                    <div class="timeline-item-content">
+                                        <div class="timeline-icon">
+                                            <i class="fas fa-glasses"></i>
+                                        </div>
+                                        <div class="timeline-marker"></div>
+                                        <div class="timeline-content shadow-sm">
+                                            <h5 class="mb-2">Senior (7+ years)</h5>
+                                            <ul class="small mb-0 ps-3">
+                                                <li>Senior-specific food</li>
+                                                <li>Joint supplements</li>
+                                                <li>Orthopedic bedding</li>
+                                                <li>Gentle grooming tools</li>
+                                            </ul>
+                                            <a href="#" class="btn btn-sm btn-outline-primary mt-2">Shop Senior</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-footer text-center mt-4">
+                                <a href="{% url 'products:pet_guides' %}" class="btn btn-primary">View All Pet Care Guides</a>
+                                <p class="text-muted small mt-2">Our experts recommend products based on your pet's specific needs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why-choose-us mb-5">
+    <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <i class="fas fa-truck feature-icon"></i>
+                    <h4>Fast Delivery</h4>
+                    <p>Quick and reliable delivery to your doorstep</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <i class="fas fa-medal feature-icon"></i>
+                    <h4>Quality Products</h4>
+                    <p>Carefully selected products for your pets</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="feature-card">
+                    <i class="fas fa-headset feature-icon"></i>
+                    <h4>24/7 Support</h4>
+                    <p>Always here to help you and your pets</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Add JavaScript for animations -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animation on scroll
+        const animateItems = document.querySelectorAll('.animate-on-scroll');
+        
+        function checkScroll() {
+            animateItems.forEach(item => {
+                const slideInAt = (window.scrollY + window.innerHeight) - item.offsetHeight / 2;
+                const itemBottom = item.offsetTop + item.offsetHeight;
+                const isHalfShown = slideInAt > item.offsetTop;
+                const isNotScrolledPast = window.scrollY < itemBottom;
+                
+                const delay = item.dataset.delay || 0;
+                
+                if (isHalfShown && isNotScrolledPast) {
+                    setTimeout(() => {
+                        item.classList.add('active');
+                    }, delay);
+                }
+            });
+        }
+        
+        // Run once on load
+        setTimeout(checkScroll, 300);
+        
+        // Add scroll event listener
+        window.addEventListener('scroll', checkScroll);
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,41 @@
+Dear {{ order.first_name }},
+
+Thank you for shopping at Janwar Junction! We're excited to confirm that your order has been received and is being processed.
+
+ORDER SUMMARY
+============
+Order Number: #{{ order.id }}
+Order Date: {{ order.created|date:"F j, Y, g:i a" }}
+
+ITEMS ORDERED
+============
+{% for item in order.items.all %}
+- {{ item.quantity }}x {{ item.product.name }}
+  Price per unit: ${{ item.price }}
+  Subtotal: ${{ item.get_cost }}
+{% endfor %}
+
+============
+Total Amount: ${{ order.total_price }}
+
+SHIPPING INFORMATION
+==================
+Name: {{ order.first_name }} {{ order.last_name }}
+Address: {{ order.address }}
+City: {{ order.city }}
+Postal Code: {{ order.postal_code }}
+
+WHAT'S NEXT?
+===========
+1. We will process your order and prepare it for shipping
+2. You'll receive a shipping confirmation email with tracking information
+3. Your order will be delivered to the provided address
+
+If you have any questions about your order, please don't hesitate to contact us at support@janwarjunction.com.
+
+Thank you for choosing Janwar Junction! We appreciate your business.
+
+Best regards,
+The Janwar Junction Team
+
+Note: This is an automated email. Please do not reply to this message. 

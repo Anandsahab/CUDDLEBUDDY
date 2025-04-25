@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Your booking receipt HTML here -->
+{% if pet_name %}
+<div style="max-width: 800px; margin: 40px auto; font-family: 'Poppins', sans-serif ; padding-top: 90px;">
+    <h1 style="font-size: 2rem; margin-bottom: 1rem;">Booking Receipt</h1>
+    <div style="border: 1px solid #e2e2e2; border-radius: 8px; overflow: hidden;">
+
+        <div style="padding: 16px; border-bottom: 1px solid #e2e2e2;">
+            <strong>Pet Name:</strong> {{ pet_name }}
+        </div>
+
+        <div style="padding: 16px; border-bottom: 1px solid #e2e2e2;">
+            <strong>Pet Type:</strong> {{ pet_type }}
+        </div>
+
+        <div style="padding: 16px; border-bottom: 1px solid #e2e2e2;">
+            <strong>Breed:</strong> {{ breed }}
+        </div>
+
+        <div style="padding: 16px; border-bottom: 1px solid #e2e2e2;">
+            <strong>Email:</strong> {{ email }}
+        </div>
+
+        <div style="padding: 16px; border-bottom: 1px solid #e2e2e2;">
+            <strong>Shipping Address:</strong> {{ address }}
+        </div>
+
+        <div style="padding: 16px; border-bottom: 1px solid #e2e2e2;">
+            <strong>Payment Method:</strong> {{ payment_method }}
+        </div>
+
+        <div style="padding: 16px;">
+            <strong>Expected Delivery Date:</strong> {{ expected_delivery }}
+        </div>
+
+    </div>
+</div>
+{% else %}
+<p style="text-align: center;">No booking data available.</p>
+{% endif %}
+
+{% endblock %}

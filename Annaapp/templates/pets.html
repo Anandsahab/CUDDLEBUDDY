@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="ftco-section">
+  <div class="container">
+    <div class="row">
+      {% for pet in pets %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          {% if pet.image %}
+          <img src="{{ pet.image.url }}" class="card-img-top" alt="{{ pet.name }}">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ pet.name }}</h5>
+            <h6 class="card-subtitle mb-2">{{ pet.get_breed_display }}</h6>
+            <p class="card-text">{{ pet.description|truncatewords:20 }}</p>
+            <a href="{% url 'adopt_now' pet.id %}" class="btn btn-warning">Adopt Now</a>
+          </div>
+        </div>
+      </div>
+      {% empty %}
+      <div class="col-12 text-center">
+        <p>No pets available at the moment. Please check back later!</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

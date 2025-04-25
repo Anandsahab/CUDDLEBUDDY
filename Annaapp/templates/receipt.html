@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="ftco-section">
+  <div class="container">
+    <h2 class="mb-4">Appointment Receipt</h2>
+    <ul class="list-group">
+      <li class="list-group-item"><strong>Name:</strong> {{ data.name }}</li>
+      <li class="list-group-item"><strong>Email:</strong> {{ data.email }}</li>
+      <li class="list-group-item"><strong>Phone:</strong> {{ data.phone }}</li>
+      <li class="list-group-item"><strong>Date:</strong> {{ data.date }}</li>
+      <li class="list-group-item"><strong>Time:</strong> {{ data.time }}</li>
+      <li class="list-group-item"><strong>Persons:</strong> {{ data.persons }}</li>
+    </ul>
+  </div>
+</section>
+{% endblock %}

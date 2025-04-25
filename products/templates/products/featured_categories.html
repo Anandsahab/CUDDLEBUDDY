@@ -1,0 +1,61 @@
+{% load static %}
+
+<div class="container">
+    <div class="row">
+        <!-- Bird Supplies Category -->
+        <div class="col-md-6 mb-4">
+            <div class="category-card">
+                <a href="{% url 'products:product_list' %}">
+                    <img src="{% static 'images/categories/bird-supplies.jpg' %}" alt="Bird Supplies" class="category-img">
+                    <div class="category-overlay">
+                        <h3>Bird Supplies</h3>
+                        <p>Food, cages, and accessories for parrots, finches, and more.</p>
+                        <span class="btn btn-light">Shop Now</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Cat Food Category -->
+        <div class="col-md-6 mb-4">
+            <div class="category-card pet-food-category">
+                <a href="{% url 'products:product_list' %}">
+                    <img src="{% static 'images/categories/cat-food.jpg' %}" alt="Cat Food" class="category-img">
+                    <div class="category-overlay">
+                        <h3>Cat Food</h3>
+                        <p>High-quality food tailored to cats' unique dietary needs.</p>
+                        <span class="btn btn-light">Shop Now</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Dog Food Category -->
+        <div class="col-md-6 mb-4">
+            <div class="category-card pet-food-category">
+                <a href="{% url 'products:product_list' %}">
+                    <img src="{% static 'images/categories/dog-food.jpg' %}" alt="Dog Food" class="category-img">
+                    <div class="category-overlay">
+                        <h3>Dog Food</h3>
+                        <p>Nutritious meals and snacks for dogs of all breeds and sizes.</p>
+                        <span class="btn btn-light">Shop Now</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Fish & Aquatics Category -->
+        <div class="col-md-6 mb-4">
+            <div class="category-card">
+                <a href="{% url 'products:product_list' %}">
+                    <img src="{% static 'images/categories/fish-aquatics.jpg' %}" alt="Fish & Aquatics" class="category-img">
+                    <div class="category-overlay">
+                        <h3>Fish & Aquatics</h3>
+                        <p>Aquariums, filters, and fish food for all aquatic pets.</p>
+                        <span class="btn btn-light">Shop Now</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div> 
